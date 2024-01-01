@@ -2,52 +2,28 @@
 
 void main()
 {
-	FILE *data , *f2, *f3;
-	int number , i;
+	FILE *f1, *f2;//f2=odd , f1=even file...
+	int i;
 	
-	data = fopen("DATA.txt","w");
+	f1 = fopen("f1.txt","w");
+	f2 = fopen("f2.txt","w");
+	
+	if(f1 == '\0' || f2 == '\0')
+	{
+		printf("no data found...");
+	}
+	
 	for(i=50;i<=70;i++)
 	{
-		scanf("%d",&number);
-		putw(number,data);
-	}
-	
-	fclose(data);
-	
-	data = fopen("DATA.txt","r");
-	f2 = fopen("ODD.txt","w");
-	f3 = fopen("EVEN.txt","w");
-	
-	while((number = getw(data)) != EOF)
-	{
-		if(number%2==0)
+		if(i%2==0)
 		{
-			putw(number,f3);//eve file
+			fprintf(f1,"%d \n",i);
 		}
-		else{
-			putw(number,f2);//odd file
+		else
+		{
+			fprintf(f2,"%d \n",i);
 		}
 	}
 	
-	fclose(data);
-	fclose(f2);
-	fclose(f3);
-	
-	f2=fopen("ODD.txt","r");
-	f3=fopen("EVEN.txt","r");
-	
-	printf("Even numbers from even_file.txt:\n\n");
-	while((number = getw(f3)) != EOF)
-	{
-		printf("%4d",number);
-	}
-	
-	printf("Odd numbers from odd_file.txt:\n\n");
-	while((number = getw(f2)) != EOF)
-	{
-		printf("%4d",number);
-	}
-	
-	fclose(f2);
-	fclose(f3);
+	printf("your both odd and even files are created successfully...");
 }
